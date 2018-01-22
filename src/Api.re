@@ -10,8 +10,10 @@ let parseHeroJson = (json: Js.Json.t) : HeroCard.hero =>
     comics: json |> field("comics", list(int)),
     powers: json |> field("powers", list(string))
   };
+
 /* parse all heroes by call Json.Decode.array with to parse all
 entries in the returned json which will look like parseHeroJson */
+
 let parseHeroesJson = (json) => Json.Decode.array(parseHeroJson, json);
 /* create function to get the data here in API since this is
 where we are processing the data.
