@@ -1,13 +1,13 @@
 type hero = {
   id: int,
   name: string,
-  true_nam: string,
-  powers: array(string),
+  true_name: string,
+  powers: list(string),
   place_of_birth: string,
   citizenship: string,
   image: string,
-  description: string,
-  comics: array(int)
+  description: option(string),
+  comics: list(int)
 };
 
 /* add react component */
