@@ -2,6 +2,7 @@
   "name": "marvel-reason-part2",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "dependencies": {
     "bs-axios": "^0.0.22",
     "bs-css": "^5.0.0",
