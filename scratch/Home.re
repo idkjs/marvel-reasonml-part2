@@ -26,7 +26,7 @@ type action =
 /* change to react reducer component */
 let component = ReasonReact.reducerComponent("Home");
 
-let str = ReasonReact.string;
+let str = ReasonReact.stringToElement;
 
 /* call make passing in hero type def and _children */
 let make = (_children) => {
@@ -38,7 +38,7 @@ let make = (_children) => {
     },
   didMount: (self) => {
     /* define () to use api to get heroes */
-    let handleLoadedHeroes = (heroes) => self.send(HeroesFetched(heroes));
+    let handleLoadedHeroes = self.reduce((heroes) => HeroesFetched(heroes));
     Api.fetchHeroes()
     |> Js.Promise.then_(
          (heroes) => {
@@ -48,12 +48,13 @@ let make = (_children) => {
        )
     /* last |> ignore is just to silence the linter. */
     |> ignore;
+    ReasonReact.NoUpdate
   },
   render: (self) => {
     let heroesComponent =
       switch self.state.heroes {
       | Some(heroes) =>
-        ReasonReact.array(
+        ReasonReact.arrayToElement(
           Array.map(
             (hero: HeroCard.hero) => <HeroCard key=(string_of_int(hero.id)) hero />,
             heroes

@@ -9,7 +9,7 @@
     "bs-jest",
     "bs-css",
     "bs-axios",
-    "bs-json"
+    "@glennsl/bs-json"
   ],
   "reason": {
     "react-jsx": 2

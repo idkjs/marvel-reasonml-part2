@@ -13,7 +13,7 @@ type hero = {
 /* add react component */
 let component = ReasonReact.statelessComponent("HeroCard");
 
-let str = ReasonReact.string;
+let str = ReasonReact.stringToElement;
 
 /* call make passing in hero type def and _children */
 let make = (~hero: hero, _children) => {

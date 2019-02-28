@@ -30,7 +30,7 @@ module Route = {
     ReasonReact.wrapJsForReason(
       ~reactClass=route,
       ~props={
-        "exact": exact,
+        "exact": Js.Boolean.to_js_boolean(exact),
         "path": Js.Nullable.fromOption(path),
         "component": Js.Nullable.fromOption(component),
         "render": Js.Nullable.fromOption(render)
