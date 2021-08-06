@@ -7,11 +7,10 @@ type hero = {
   citizenship: string,
   image: string,
   description: option(string),
-  comics: list(int)
+  comics: list(int),
 };
-
 
 [@react.component]
 let make = (~hero: hero) => {
- <div> (React.string("Hero name " ++ hero.name)) </div>
+  <div> {React.string("Hero name " ++ hero.name)} </div>;
 };

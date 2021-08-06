@@ -1,6 +1,4 @@
-
-
-
 [@react.component]
-
-let make = () => {<div> (React.string("Details")) </div>};
+let make = () => {
+  <div> {React.string("Details")} </div>;
+};

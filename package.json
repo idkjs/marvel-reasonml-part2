@@ -16,6 +16,7 @@
     "reason-scripts": "1.0.0"
   },
   "scripts": {
+    "format": "find src -name \"*.re\" -or -name \"*.rei\"  | xargs bsrefmt --in-place",
     "start": "react-scripts start",
     "watch": "bsb -make-world -w",
     "clean": "bsb -clean-world",
