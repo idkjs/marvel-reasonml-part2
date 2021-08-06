@@ -8,15 +8,13 @@ let renderHome = () => <Home />;
 
 let renderDetails = () => <Details />;
 
-let component = ReasonReact.statelessComponent("App");
 
-let make = (_children) => {
-  ...component,
-  render: (_self) =>
+[@react.component]
+let make = () => {
     <BrowserRouter>
       <div> <TopBar />
       <Switch>
-        <Route path="/" exact=true component=renderHome /> 
+        <Route path="/" exact=true component=renderHome />
         <Route path="/details" exact=true component=renderDetails />
       </Switch>
       </div>

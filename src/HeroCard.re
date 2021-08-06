@@ -10,13 +10,8 @@ type hero = {
   comics: list(int)
 };
 
-/* add react component */
-let component = ReasonReact.statelessComponent("HeroCard");
 
-let str = ReasonReact.string;
-
-/* call make passing in hero type def and _children */
-let make = (~hero: hero, _children) => {
-  ...component,
-  render: (_self) => <div> (str("Hero name " ++ hero.name)) </div>
+[@react.component]
+let make = (~hero: hero) => {
+ <div> (React.string("Hero name " ++ hero.name)) </div>
 };

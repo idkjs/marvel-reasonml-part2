@@ -1,5 +1,6 @@
-let component = ReasonReact.statelessComponent("Details");
 
-let str = ReasonReact.string;
 
-let make = (_children) => {...component, render: (_self) => <div> (str("Details")) </div>};
+
+[@react.component]
+
+let make = () => {<div> (React.string("Details")) </div>};

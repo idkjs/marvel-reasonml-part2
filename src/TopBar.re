@@ -1,14 +1,13 @@
 [@bs.module] external logo : string = "./assets/Marvel-Logo.png";
-let component = ReasonReact.statelessComponent("YoDawgTopBar");
 
-let str = ReasonReact.string;
+
 
 let style =
   Css.(
     {
       "header":
         style([
-          backgroundColor(rgba(238, 35, 45, 1.0)),
+          backgroundColor(rgba(238, 35, 45, `num(1.0))),
           display(`flex),
           justifyContent(`spaceBetween),
           alignItems(`center)
@@ -19,18 +18,17 @@ let style =
       "search_input": style([marginRight(px(8))])
     }
   );
+[@react.component]
+let make = () => {
 
-let make = (_children) => {
-  ...component,
-  render: (_self) =>
     <header className=style##header>
       <a href="#">
         <img className=style##logo src={logo} />
       </a>
-      <span className=style##title> (str("Super Marvel Heroes")) </span>
+      <span className=style##title> (React.string("Super Marvel Heroes")) </span>
       <div className=style##search_input_wrapper>
         <input className=style##search_input placeholder="search" />
-        <button> (str("Search")) </button>
+        <button> (React.string("Search")) </button>
       </div>
     </header>
 };

@@ -1,40 +1,34 @@
 open History;
 
 type renderFunc =
-  {. "match": Js.Dict.t(string), "history": History.h, "location": History.Location.l} =>
-  ReasonReact.reactElement;
+  {
+    .
+    "match": Js.Dict.t(string),
+    "history": History.history,
+    "location": History.Location.location,
+  } =>
+  React.element;
 
 module BrowserRouter = {
-  [@bs.module "react-router-dom"] external browserRouter : ReasonReact.reactClass =
-    "BrowserRouter";
-  let make = (children) =>
-    ReasonReact.wrapJsForReason(~reactClass=browserRouter, ~props=Js.Obj.empty(), children);
+  [@bs.module "react-router-dom"] [@react.component]
+  external make: (~children: React.element) => React.element = "BrowserRouter";
 };
 
 module Switch = {
-  [@bs.module "react-router-dom"] external _switch : ReasonReact.reactClass = "Switch";
-  let make = (children) =>
-    ReasonReact.wrapJsForReason(~reactClass=_switch, ~props=Js.Obj.empty(), children);
+  [@bs.module "react-router-dom"] [@react.component]
+  external make: (~children: React.element) => React.element = "Switch";
 };
 
 module Route = {
-  [@bs.module "react-router-dom"] external route : ReasonReact.reactClass = "Route";
-  let make =
-      (
-        ~component: option(('a => ReasonReact.reactElement))=?,
-        ~exact: bool=false,
-        ~path: option(string)=?,
-        ~render: option(renderFunc)=?,
-        children
-      ) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass=route,
-      ~props={
-        "exact": exact,
-        "path": Js.Nullable.fromOption(path),
-        "component": Js.Nullable.fromOption(component),
-        "render": Js.Nullable.fromOption(render)
-      },
-      children
-    );
+  [@bs.module "react-router-dom"] [@react.component]
+  external make:
+    (
+      ~component: option('a => React.element)=?,
+      ~exact: bool=?,
+      ~path: option(string)=?,
+      ~render: option(renderFunc)=?,
+      ~children: React.element=?
+    ) =>
+    React.element =
+    "Route";
 };

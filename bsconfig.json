@@ -6,16 +6,16 @@
   },
   "bs-dependencies": [
     "reason-react",
-    "bs-jest",
+    "@glennsl/bs-jest",
     "bs-css",
+    "bs-css-emotion",
     "bs-axios",
     "@glennsl/bs-json"
   ],
   "reason": {
-    "react-jsx": 2
+    "react-jsx": 3
   },
   "bsc-flags": [
     "-bs-super-errors"
-  ],
-  "refmt": 3
+  ]
 }

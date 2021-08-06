@@ -24,43 +24,41 @@ type action =
      comics: [5, 9, 20, 26]
    }; */
 /* change to react reducer component */
-let component = ReasonReact.reducerComponent("Home");
 
-let str = ReasonReact.string;
-
-/* call make passing in hero type def and _children */
-let make = (_children) => {
-  ...component,
-  initialState: () => {heroes: None},
-  reducer: (action, _state) =>
-    switch action {
-    | HeroesFetched(heroes) => ReasonReact.Update({heroes: Some(heroes)})
-    },
-  didMount: (self) => {
+[@react.component]
+let make = () => {
+  let (state, dispatch) =
+    React.useReducer(
+      (_state, action) =>
+        switch (action) {
+        | HeroesFetched(heroes) => {heroes: Some(heroes)}
+        },
+      {heroes: None},
+    );
+  React.useEffect0(() => {
     /* define () to use api to get heroes */
-    let handleLoadedHeroes = (heroes) => self.send(HeroesFetched(heroes));
+    let handleLoadedHeroes = heroes => dispatch(HeroesFetched(heroes));
     Api.fetchHeroes()
-    |> Js.Promise.then_(
-         (heroes) => {
-           handleLoadedHeroes(heroes);
-           Js.Promise.resolve()
-         }
-       )
+    |> Js.Promise.then_(heroes => {
+         handleLoadedHeroes(heroes);
+         Js.Promise.resolve();
+       })
     /* last |> ignore is just to silence the linter. */
     |> ignore;
-  },
-  render: (self) => {
-    let heroesComponent =
-      switch self.state.heroes {
-      | Some(heroes) =>
-        ReasonReact.array(
-          Array.map(
-            (hero: HeroCard.hero) => <HeroCard key=(string_of_int(hero.id)) hero />,
-            heroes
-          )
-        )
-      | None => str("Loading")
-      };
-    <div> heroesComponent </div>
-  }
+    None;
+  });
+
+  let heroesComponent =
+    switch (state.heroes) {
+    | Some(heroes) =>
+      React.array(
+        Array.map(
+          (hero: HeroCard.hero) =>
+            <HeroCard key={string_of_int(hero.id)} hero />,
+          heroes,
+        ),
+      )
+    | None => React.string("Loading")
+    };
+  <div> heroesComponent </div>;
 };
